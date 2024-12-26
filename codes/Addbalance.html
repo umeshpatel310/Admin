@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/header.css">
+
+    
+
+    <style>
+        h2 {
+            font-size: 36px;
+            color: #4A90E2;
+            margin-bottom: 30px;
+        }
+    
+        .search-bar-sec {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: border-color 0.3s ease;
+        }
+    
+        .search-bar-sec:focus {
+            border-color: #4A90E2;
+            outline: none;
+        }
+    
+        .search-button-sec {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .search-button-sec:hover {
+            background-color: #357ABD;
+        }
+    
+        .user-div-sec {
+            background-color: rgb(29, 28, 28);
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .user-div-sec:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 20px rgba(165, 9, 9, 0.2);
+        }
+    
+        .user-div-sec h3 {
+            color: #4A90E2;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+    
+        .user-div-sec p {
+            font-size: 16px;
+            color: #ebe8e8;
+            margin-bottom: 10px;
+        }
+    
+        .user-div-sec label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            color: #ccc;
+            margin-top: 15px;
+        }
+    
+        .user-div-sec input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            background-color: white;
+            border: 1px solid #fffbfb;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+    
+        .user-div-sec input:focus {
+            border-color: #4A90E2;
+            outline: none;
+        }
+    
+        .user-div-sec button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .user-div-sec button:hover {
+            background-color: #357ABD;
+        }
+    
+        .tra-sec {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            color: #ccc;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+        }
+    
+        .trans-sec {
+            margin-bottom: 15px;
+        }
+    
+        .trans-sec input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    
+        .trans-sec button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5CDB95;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        .trans-sec button:hover {
+            background-color: #45A76D;
+        }
+    
+        /* Loading Bar */
+        #loading-bar-sec {
+            margin-top: 30px;
+            display: none;
+        }
+    
+        progress {
+            width: 100%;
+            height: 20px;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .search-bar-sec {
+                width: 80%;
+            }
+    
+            .user-div-sec {
+                padding: 15px;
+            }
+    
+            .trans-sec input {
+                font-size: 12px;
+            }
+    
+            .trans-sec button {
+                font-size: 14px;
+            }
+        }
+    </style>
+     <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
+
+        h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-bar {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #45a049;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.delete-btn{
+
+    background-color: #e60202;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+
+}
+
+.update-btn {
+
+    font-size: 16px;
+    border-radius: 4px;
+
+    background-color: #0224e6;
+    color: white;
+}
+
+.search-btn:hover {
+    background-color: #45a049;
+}
+
+        h3 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Loading Bar */
+        #loading-bar-container {
+            width: 100%;
+            height: 5px;
+            background-color: #ddd;
+            display: none;
+        }
+
+        #loading-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0;
+        }
+
+        /* Withdrawal Card Styling */
+        .withdrawal-card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 300px;
+            padding: 20px;
+            
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .withdrawal-card:hover {
+            transform: scale(1.05);
+        }
+
+        .withdrawal-header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .withdrawal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #222121;
+        }
+
+        .withdrawal-header p {
+            margin: 5px 0;
+            color: #3a3838;
+        }
+
+        .withdrawal-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .details-row{
+            display: grid;
+          
+        }
+
+        .details-row p {
+            margin: 0;
+            margin-top: 5px;
+            color: #111010;
+        }
+
+        .details-row p strong {
+            color: #0a0a0a;
+            margin-top: 5px;
+        }
+
+        /* Clean Button Styling */
+        .clean-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .clean-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .withdrawal-card {
+                width: 90%;
+            }
+        }
+
+        .withdrawal-card{
+
+            border: 0.2px solid #1f1919;
+            padding: 5px;
+            margin-left: 3px;
+            border-radius: 3px;
+            
+            width: auto;
+        }
+
+        .transaction-card{
+            border: 0.2px solid #aa2323;
+            padding: 5px;
+            margin-left: 3px;
+            border-radius: 3px;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <header>
+        <div class="left">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span> <!-- Menu Button -->
+        </div>
+
+        <div class="center">
+            <h1>HonestTurnament.Com =  Admin Panal</h1>
+        </div>
+        <div class="right">
+            <div class="wallet">
+            </div>
+        </div>
+    </header>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleMenu()">×</a>
+        <a href="pubg.html">Home</a>
+        <a href="profile.html">My Account</a> 
+        <a href="matchList.html">Match Results</a>     
+        <a href="support.html">Support</a>
+        <a href="login.html" onclick="logout()">Log Out</a>
+    </div>
+
+    <script>
+        // Toggle the sidebar menu open/close
+        function toggleMenu() {
+            const sidebar = document.getElementById("mySidebar");
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+            } else {
+                sidebar.style.width = "250px";
+            }
+        }
+    
+        // Logout Function (clear local storage/session storage)
+        function logout() {
+            localStorage.removeItem('userUID');  // Remove UID from localStorage (or sessionStorage if used)
+            window.location.href = "login.html";  // Redirect to login page
+        }
+    </script>
+
+<a href="https://example.com/download" class="download-link">App Download Now</a>
+
+<div class="optin">
+    <div class="Llist">
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html">Home </a></li>
+                <li><a  style="text-decoration-thickness: 5px;  background-color: red;">AddBalance </a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<h2>Firebase Users Data</h2>
+
+<!-- Search Bar -->
+<input type="text" id="search-input" class="search-bar-sec" placeholder="Enter User ID or Player ID" />
+<button class="search-button-sec" onclick="handleSearch()">Search</button>
+
+<div id="loading-bar-sec" style="display: none; margin-top: 20px;">
+    <progress id="progress" value="0" max="100" style="width: 100%;"></progress>
+</div>
+
+ <!-- Users Data Container -->
+ <div id="users-container"></div>
+
+ 
+ 
+
+
+<h2>Search and Update Transaction</h2>
+
+<!-- Search Bar -->
+<div class="search-container">
+    <input type="text" id="search-inputsec" class="search-bar" placeholder="Enter User ID">
+    <button class="search-btn" id="search-btn">Search</button>
+</div>
+
+<!-- Loading Indicator -->
+<div class="loading" id="loading">Loading...</div>
+
+<!-- Transaction Cards Container -->
+<div  style="display: flex; color: red; flex-wrap: wrap;  border: 1px solid rgb(39, 39, 158); " id="transactions-container"></div>
+<h3>Add balance Tracker</h3>
+
+<!-- Loading Bar -->
+<div  id="loading-bar-container">
+    <div   id="loading-bar"></div>
+</div>
+
+<div class="container" id="match-container"></div>
+
+ <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+    import { getDatabase, ref,get, onValue, update, push, set,remove } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+        authDomain: "testapp-6bd8a.firebaseapp.com",
+        databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+        projectId: "testapp-6bd8a",
+        storageBucket: "testapp-6bd8a.appspot.com",
+        messagingSenderId: "1083835564982",
+        appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    let currentUserId = ""; 
+
+          // Function to search transaction by User ID
+          function searchTransaction() {
+            const userId = document.getElementById('search-inputsec').value.trim();
+            if (userId === "") {
+                alert("Please enter a User ID");
+                return;
+            }
+
+            // Show loading indicator
+            document.getElementById('loading').style.display = 'block';
+            const transactionsRef = ref(database, `transactions/${userId}`);
+
+            // Fetch transactions for the entered userId
+            get(transactionsRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    displayTransactions(data);
+                } else {
+                    alert("No transactions found for this User ID.");
+                    document.getElementById('transactions-container').innerHTML = ""; // Clear previous results
+                }
+
+                // Hide loading indicator
+                document.getElementById('loading').style.display = 'none';
+            }).catch((error) => {
+                console.error("Error fetching transaction data:", error);
+                document.getElementById('loading').style.display = 'none';
+            });
+        }
+
+        // Display all transactions under the given User ID
+        function displayTransactions(transactions) {
+            const transactionsContainer = document.getElementById('transactions-container');
+            transactionsContainer.innerHTML = ""; // Clear previous transactions
+
+            for (const txnId in transactions) {
+                const txnData = transactions[txnId];
+
+                // Create a new transaction card for each transaction
+                const transactionCard = document.createElement('div');
+                transactionCard.classList.add('transaction-card');
+                transactionCard.innerHTML = `
+                    <h3 style="margin-left: 20px;" >Transaction ID: ${txnId}</h3>
+                    <p><strong>Amount:</strong> ₹${txnData.amount}</p>
+                     <p><strong>Out/Add:</strong> ₹${txnData.out}</p>
+
+                    <p><strong>Status:</strong> ${txnData.status}</p>
+                    <p><strong>Date:</strong> ${txnData.timestamp}</p>
+                    <button class="update-btn" data-txn-id="${txnId}" data-user-id="${document.getElementById('search-inputsec').value.trim()}">Update Status</button>
+                    <button class="delete-btn" data-txn-id="${txnId}" data-user-id="${document.getElementById('search-inputsec').value.trim()}">Delete</button>
+                `;
+                transactionsContainer.appendChild(transactionCard);
+            }
+
+            // Attach event listeners to the buttons dynamically
+            attachEventListeners();
+        }
+ 
+          // Function to attach event listeners to the buttons
+          function attachEventListeners() {
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const txnId = e.target.getAttribute('data-txn-id');
+                    const userId = e.target.getAttribute('data-user-id');
+                    deleteTransaction(txnId, userId);
+                });
+            });
+
+            const updateButtons = document.querySelectorAll('.update-btn');
+            updateButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const txnId = e.target.getAttribute('data-txn-id');
+                    const currentStatus = e.target.closest('.transaction-card').querySelector('p:nth-of-type(2)').textContent.split(":")[1].trim();
+                    updateStatus(txnId, currentStatus);
+                });
+            });
+        }
+
+
+             // Function to delete a transaction
+        function deleteTransaction(transactionId, userId) {
+            const transactionRef = ref(database, `transactions/${userId}/${transactionId}`);
+
+            // Remove the transaction from the database
+            remove(transactionRef).then(() => {
+                alert("Transaction deleted successfully!");
+                // Refresh the transaction view
+                searchTransaction();
+            }).catch((error) => {
+                console.error("Error deleting transaction:", error);
+            });
+        }
+
+
+            // Function to update the status of a transaction
+        function updateStatus(transactionId, currentStatus) {
+            const newStatus = prompt("Enter new status:", currentStatus);
+            if (newStatus) {
+                const userId = document.getElementById('search-inputsec').value.trim();
+                const transactionRef = ref(database, `transactions/${userId}/${transactionId}`);
+
+                // Update the status in the database
+                update(transactionRef, { status: newStatus }).then(() => {
+                    alert("Status updated successfully!");
+                    // Refresh the transaction view
+                    searchTransaction();
+                }).catch((error) => {
+                    console.error("Error updating status:", error);
+                });
+            }
+        }
+
+
+          // Ensure script runs after the DOM is fully loaded
+          document.addEventListener('DOMContentLoaded', function() {
+            const searchBtn = document.getElementById('search-btn');
+            if (searchBtn) {
+                searchBtn.addEventListener('click', searchTransaction);
+            }
+        });
+
+        // Show loading bar
+        function showLoading() {
+            document.getElementById('loading-bar-container').style.display = 'block';
+            document.getElementById('loading-bar').style.width = '100%';
+        }
+
+        // Hide loading bar
+        function hideLoading() {
+            document.getElementById('loading-bar').style.width = '0%';
+            setTimeout(() => {
+                document.getElementById('loading-bar-container').style.display = 'none';
+            }, 500);
+        }
+
+        // Function to fetch withdrawal data
+        function fetchWithdrawals() {
+            showLoading();
+
+            const withdrawalsRef = ref(database, 'AddAmount/');  // Path to 'withdrwal' in your Firebase DB
+
+            onValue(withdrawalsRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const matchContainer = document.getElementById('match-container');
+                    matchContainer.innerHTML = ""; // Clear previous content
+
+                    // Loop through all users and their withdrawals
+                    Object.keys(data).forEach(userId => {
+                        const userWithdrawals = data[userId];
+
+                        // Convert the withdrawals object into an array and sort it by timestamp
+                        const sortedWithdrawals = Object.keys(userWithdrawals)
+                            .map(transactionId => {
+                                return { transactionId, ...userWithdrawals[transactionId] };
+                            })
+                            .sort((a, b) => b.timestamp - a.timestamp); // Sort by timestamp in descending order
+
+                        // Loop through each sorted withdrawal data
+                        sortedWithdrawals.forEach(withdrawalData => {
+                            const withdrawalDiv = document.createElement('div');
+                            withdrawalDiv.classList.add('withdrawal-card');
+
+                            // Displaying withdrawal data
+                            withdrawalDiv.innerHTML = `
+                                <div class="withdrawal-header">
+                                    <h3>User: ${userId}</h3>
+                                    <p><strong>Transaction ID:</strong> ${withdrawalData.transactionId}</p>
+                                </div>
+                                <div class="withdrawal-details">
+                                    <div class="details-row">
+                                       
+                                        
+                                         <p><strong>Amount:</strong> ₹${withdrawalData.amount}</p>
+                                          <p   style=" color: red; "><strong>RefNo:</strong> ${withdrawalData.userInput}</p>
+                                        <p><strong>Date:</strong> ${new Date(withdrawalData.timestamp).toLocaleString()}</p>
+                                    </div>
+                                </div>
+                            `;
+
+                            // Create the "Clean" button
+                            const cleanButton = document.createElement('button');
+                            cleanButton.classList.add('clean-btn');
+                            cleanButton.textContent = 'Clean';  // Changed text to "Clean"
+
+                            // Add the click event listener
+                            cleanButton.addEventListener('click', () => {
+                                deleteWithdrawal(userId, withdrawalData.transactionId);
+                            });
+
+                            // Append the clean button to the withdrawal card
+                            withdrawalDiv.appendChild(cleanButton);
+
+                            // Append the withdrawal data to the container
+                            matchContainer.appendChild(withdrawalDiv);
+                        });
+                    });
+                } else {
+                    console.log("No withdrawal data available.");
+                }
+
+                hideLoading();
+            });
+        }
+
+        // Function to delete a withdrawal from Firebase
+        function deleteWithdrawal(userId, transactionId) {
+            const withdrawalRef = ref(database, `AddAmount/${userId}/${transactionId}`);
+
+            remove(withdrawalRef)
+                .then(() => {
+                    fetchWithdrawals();  // Re-fetch data to update the UI
+                    alert("Withdrawal cleaned successfully!");
+                    fetchWithdrawals();  // Re-fetch data to update the UI
+                })
+                .catch((error) => {
+                    console.error("Error cleaning withdrawal:", error);
+                });
+        }
+
+        // Fetch withdrawals on page load
+        fetchWithdrawals();
+
+    function searchUser(query) {
+        const usersRef = ref(database, 'users');
+        const usersContainer = document.getElementById('users-container');
+        usersContainer.innerHTML = ''; 
+
+        const loadingBar = document.getElementById('loading-bar-sec');
+        const progressBar = document.getElementById('progress');
+        loadingBar.style.display = 'block';
+        progressBar.value = 0;
+
+        if (query) {
+            let progressInterval = setInterval(() => {
+                if (progressBar.value < 100) {
+                    progressBar.value += 5;
+                }
+            }, 100);
+
+            onValue(usersRef, (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    const userData = childSnapshot.val();
+                    const userID = childSnapshot.key;
+                    const playerID = userData.playerID;
+
+                    if ((userID && userID.includes(query)) || (playerID && playerID.includes(query))) {
+                        currentUserId = userID;
+
+                        const userDiv = document.createElement('div');
+                        userDiv.classList.add('user-div-sec');
+                        userDiv.innerHTML = `
+                           <h3>User ID: ${userID}</h3>
+                            <p><strong>Name:</strong> ${userData.name}</p>
+                            <p><strong>Email:</strong> ${userData.email}</p>
+                           <p><strong>Player ID:</strong> ${userData.playerID}</p>
+                           <p><strong>Mobile Number:</strong> ${userData.mobileNumber}</p>
+
+                           <label for="wallet-amount">Wallet Amount:</label>
+                          <input type="number" id="wallet-amount" value="${userData.walletAmount}" />
+                          <button onclick="updateWalletAmount()">Update Wallet</button>
+                        `;
+                        
+                        usersContainer.appendChild(userDiv);
+                    }
+                });
+
+                clearInterval(progressInterval);
+                loadingBar.style.display = 'none';
+            });
+        }
+    }
+
+    window.handleSearch = function() {
+        const searchQuery = document.getElementById('search-input').value;
+        searchUser(searchQuery);
+    }
+
+    window.updateWalletAmount = function() {
+        const newWalletAmount = document.getElementById('wallet-amount').value;
+
+        const userRef = ref(database, 'users/' + currentUserId);
+
+        update(userRef, {
+            walletAmount: newWalletAmount
+        }).then(() => {
+            alert("Wallet amount updated successfully!");
+            // Clear search results after updating wallet
+            document.getElementById('users-container').innerHTML = '';
+        }).catch((error) => {
+            alert("Error updating wallet amount: " + error.message);
+        });
+    }
+
+</script>
+
+</body>
+</html>

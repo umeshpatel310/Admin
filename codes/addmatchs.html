@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style/header.css">
+
+    <style>
+        .form-container {
+         background-color: #181717;
+        
+         border-radius: 8px;
+         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+         width: 100%;
+         display: grid;
+         margin-bottom: 70px;
+         margin-top: 40px;
+        
+     }
+
+     .form-container entr{
+
+         display: flex;
+         background-color: aliceblue;
+         width: 100%;
+
+
+     }
+
+     form {
+         display: flex;
+         flex-direction: column;
+     }
+
+     label {
+         font-size: 12px;
+         color: #979292;
+         margin-bottom: 4px;
+     }
+
+     input[type="text"], input[type="date"] {
+         padding: 4px;
+         font-size: 13px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         margin-bottom: 20px;
+         outline: none;
+         transition: border-color 0.3s ease;
+     }
+
+     input[type="text"]:focus, input[type="date"]:focus {
+         border-color: #007BFF;
+     }
+
+     button {
+         padding: 10px 0px;
+         font-size: 18px;
+         color: #fff;
+         background-color: #007BFF;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         transition: background-color 0.3s ease;
+     }
+
+     button:hover {
+         background-color: #e209e2;
+     }
+
+     button:focus {
+         outline: none;
+     }
+
+     .form-container p {
+         font-size: 14px;
+         text-align: center;
+         margin-top: 10px;
+     }
+
+    
+
+     .date{
+        height: 25px; margin-bottom: 10px; width: 290px; align-self: center;  font-size: 15px;
+     }
+
+     h2{
+        color: white;
+     }
+     
+
+
+ </style>
+    
+</head>
+<body>
+
+    <header>
+       
+        <div class="left">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span> <!-- Menu Button -->
+        </div>
+
+        <div class="center">
+            <h1>HonestTurnament.Com =  Admin Panal</h1>
+        </div>
+        <div class="right">
+            <div class="wallet">
+               
+            </div>
+           
+        </div>
+    </header>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleMenu()">×</a>
+        <a href="pubg.html">Home</a>
+        <a href="profile.html">My Account</a> 
+        <a href="matchList.html">Match Results</a>     
+        <a href="support.html">Support</a>
+        <a href="login.html" onclick="logout()">Log Out</a>
+    </div>
+
+    <script>
+        // Toggle the sidebar menu open/close
+        function toggleMenu() {
+            const sidebar = document.getElementById("mySidebar");
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+            } else {
+                sidebar.style.width = "250px";
+            }
+        }
+    
+        // Logout Function (clear local storage/session storage)
+        function logout() {
+            localStorage.removeItem('userUID');  // Remove UID from localStorage (or sessionStorage if used)
+            window.location.href = "login.html";  // Redirect to login page
+        }
+    </script>
+
+<a href="https://example.com/download" class="download-link">App Download Now</a>
+
+
+
+<div class="optin">
+    <div class="Llist">
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html">Home </a></li>
+               
+               
+               
+               
+            </ul>
+        </nav>
+    </div>
+
+    <div class="Mlist">
+        <nav class="sec-nav">
+            <ul class="nav-list">
+
+               
+               
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="container" id="match-container"></div>
+
+<div style="display: none;" class="form-container">
+
+
+
+    <h2>PUBG Match Entry</h2>
+    
+
+    <div class="entr" >
+
+        <label for="matchName">Match Name:</label>
+        <input type="text" id="matchName" required value="PUBG">
+        
+        <label for="prize">Prize Amount:</label>
+        <input type="text" id="prize" required placeholder="Enter prize amount">
+
+        <label for="matchName">Per kill:</label>
+        <input type="text" id="perkill" required placeholder="Per kill">
+        
+        <label for="prize">Winners:</label>
+        <input type="text" id="winners" required placeholder="Enter Winners">
+
+        <label for="matchName">1st :</label>
+        <input type="text" id="1st" required placeholder="Enter 1st ">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">2nd:</label>
+        <input type="text" id="2nd" required placeholder="Enter 2nd">
+        
+        <label for="prize">3rd:</label>
+        <input type="text" id="3rd" required placeholder="Enter 3rd">
+
+        <label for="matchName">Type:</label>
+        <input type="text" id="type" required placeholder="Enter match Type">
+        
+        <label for="prize">Map:</label>
+        <input type="text" id="map" required placeholder="Enter Map">
+
+        <label for="matchName">Version:</label>
+        <input type="text" id="version" required placeholder="Enter Version Tpp/Fpp">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">Entry Fees:</label>
+        <input type="text" id="entryfees" required placeholder="Enter Entry Fees">
+        
+        <label for="prize">Total Players:</label>
+        <input type="text" id="totalplyear" required value="0">
+
+        <label for="matchName">Max Players:</label>
+        <input type="text" id="maxp" required value="100">
+        
+        <label for="prize">Room id:</label>
+        <input type="text" id="roomid" required value="please">
+
+        <label for="matchName">Paasword:</label>
+        <input type="text" id="paasword" required value="wait">
+
+    </div>
+
+   
+    
+    <label for="date">Match Date:</label>
+    <div>
+        <input class="date"  type="datetime-local" id="date" required placeholder="Date and Time">
+    </div>
+    
+    
+    
+    <button type="button" onclick="submitMatchData()">Submit</button>
+</div>
+
+
+<div class="form-container">
+
+
+
+    <h2>BGMI Match Entry</h2>
+    
+
+    <div class="entr" >
+
+        <label for="matchName">Match Name:</label>
+        <input type="text" id="bmatchName" required value="BGMI">
+        
+        <label for="prize">Prize Amount:</label>
+        <input type="text" id="bprize" required placeholder="Enter prize amount">
+
+        <label for="matchName">Per kill:</label>
+        <input type="text" id="bperkill" required placeholder="Per kill">
+        
+        <label for="prize">Winners:</label>
+        <input type="text" id="bwinners" required placeholder="Enter Winners">
+
+        <label for="matchName">1st :</label>
+        <input type="text" id="b1st" required placeholder="Enter 1st ">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">2nd:</label>
+        <input type="text" id="b2nd" required placeholder="Enter 2nd">
+        
+        <label for="prize">3rd:</label>
+        <input type="text" id="b3rd" required placeholder="Enter 3rd">
+
+        <label for="matchName">Type:</label>
+        <input type="text" id="btype" required placeholder="Enter match Type">
+        
+        <label for="prize">Map:</label>
+        <input type="text" id="bmap" required placeholder="Enter Map">
+
+        <label for="matchName">Version:</label>
+        <input type="text" id="bversion" required placeholder="Enter Version Tpp/Fpp">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">Entry Fees:</label>
+        <input type="text" id="bentryfees" required placeholder="Enter Entry Fees">
+        
+        <label for="prize">Total Players:</label>
+        <input type="text" id="btotalplyear" required value="0">
+
+        <label for="matchName">Max Players:</label>
+        <input type="text" id="bmaxp" required value="100">
+        
+        <label for="prize">Room id:</label>
+        <input type="text" id="broomid" required value="please">
+
+        <label for="matchName">Paasword:</label>
+        <input type="text" id="bpaasword" required value="wait">
+
+    </div>
+
+   
+    
+    <label for="date">Match Date:</label>
+   
+
+    <div>
+        <input class="date"  type="datetime-local" id="bdate" required placeholder="Date and Time">
+    </div>
+    
+    <button type="button" onclick="submitbgmiMatchData()">Submit</button>
+</div>
+
+<div class="form-container">
+
+
+
+    <h2>Free Fire Match Entry</h2>
+    
+
+    <div class="entr" >
+
+        <label for="matchName">Match Name:</label>
+        <input type="text" id="fmatchName" required value="Ffire">
+        
+        <label for="prize">Prize Amount:</label>
+        <input type="text" id="fprize" required placeholder="Enter prize amount">
+
+        <label for="matchName">Per kill:</label>
+        <input type="text" id="fperkill" required placeholder="Per kill">
+        
+        <label for="prize">Winners:</label>
+        <input type="text" id="fwinners" required placeholder="Enter Winners">
+
+        <label for="matchName">1st :</label>
+        <input type="text" id="f1st" required placeholder="Enter 1st ">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">2nd:</label>
+        <input type="text" id="f2nd" required placeholder="Enter 2nd">
+        
+        <label for="prize">3rd:</label>
+        <input type="text" id="f3rd" required placeholder="Enter 3rd">
+
+        <label for="matchName">Type:</label>
+        <input type="text" id="ftype" required placeholder="Enter match Type">
+        
+        <label for="prize">Map:</label>
+        <input type="text" id="fmap" required placeholder="Enter Map">
+
+        <label for="matchName">Version:</label>
+        <input type="text" id="fversion" required placeholder="Enter Version Tpp/Fpp">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">Entry Fees:</label>
+        <input type="text" id="fentryfees" required placeholder="Enter Entry Fees">
+        
+        <label for="prize">Total Players:</label>
+        <input type="text" id="ftotalplyear" required value="0">
+
+        <label for="matchName">Max Players:</label>
+        <input type="text" id="fmaxp" required value="100">
+        
+        <label for="prize">Room id:</label>
+        <input type="text" id="froomid" required value="please">
+
+        <label for="matchName">Paasword:</label>
+        <input type="text" id="fpaasword" required value="wait">
+
+    </div>
+
+   
+    
+    <label for="date">Match Date:</label>
+    
+
+    <div>
+        <input class="date"  type="datetime-local" id="fdate" required placeholder="Date and Time">
+    </div>
+    
+    <button type="button" onclick="submitfireMatchData()">Submit</button>
+</div>
+
+
+<div style="display: none;" class="form-container">
+
+
+
+    <h2>Call of Duty Match Entry</h2>
+    
+
+    <div class="entr" >
+
+        <label for="matchName">Match Name:</label>
+        <input type="text" id="cmatchName" required value="COD">
+        
+        <label for="prize">Prize Amount:</label>
+        <input type="text" id="cprize" required placeholder="Enter prize amount">
+
+        <label for="matchName">Per kill:</label>
+        <input type="text" id="cperkill" required placeholder="Per kill">
+        
+        <label for="prize">Winners:</label>
+        <input type="text" id="cwinners" required placeholder="Enter Winners">
+
+        <label for="matchName">1st :</label>
+        <input type="text" id="c1st" required placeholder="Enter 1st ">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">2nd:</label>
+        <input type="text" id="c2nd" required placeholder="Enter 2nd">
+        
+        <label for="prize">3rd:</label>
+        <input type="text" id="c3rd" required placeholder="Enter 3rd">
+
+        <label for="matchName">Type:</label>
+        <input type="text" id="ctype" required placeholder="Enter match Type">
+        
+        <label for="prize">Map:</label>
+        <input type="text" id="cmap" required placeholder="Enter Map">
+
+        <label for="matchName">Version:</label>
+        <input type="text" id="cversion" required placeholder="Enter Version Tpp/Fpp">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">Entry Fees:</label>
+        <input type="text" id="centryfees" required placeholder="Enter Entry Fees">
+        
+        <label for="prize">Total Players:</label>
+        <input type="text" id="ctotalplyear" required value="0">
+
+        <label for="matchName">Max Players:</label>
+        <input type="text" id="cmaxp" required value="100">
+        
+        <label for="prize">Room id:</label>
+        <input type="text" id="croomid" required value="please">
+
+        <label for="matchName">Paasword:</label>
+        <input type="text" id="cpaasword" required value="wait">
+
+    </div>
+
+   
+    
+    <label for="date">Match Date:</label>
+   
+    <div>
+        <input class="date"  type="datetime-local" id="cdate" required placeholder="Date and Time">
+    </div>
+    
+    <button type="button" onclick="submitcallMatchData()">Submit</button>
+</div>
+
+
+
+  <!-- Firebase SDK (v9 or later) -->
+<script type="module">
+    // Firebase Config
+    const firebaseConfig = {
+        apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+        authDomain: "testapp-6bd8a.firebaseapp.com",
+        databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+        projectId: "testapp-6bd8a",
+        storageBucket: "testapp-6bd8a.appspot.com",
+        messagingSenderId: "1083835564982",
+        appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+    };
+
+    // Import Firebase modules (v9+)
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+    import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+    import { getAuth } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    const auth = getAuth(app);
+
+// Check if the user is authenticated
+const userUID = localStorage.getItem('adminUID');
+if (!userUID) {
+    window.location.href = 'login.html';  // If not authenticated, redirect to login
+}
+
+    // Function to pubg submit match data
+     window.submitMatchData = function() {
+
+
+
+        const prize = document.getElementById('prize').value;
+        const matchName = document.getElementById('matchName').value;
+        
+        const perkill = document.getElementById('perkill').value;
+        const winners = document.getElementById('winners').value;
+        const first = document.getElementById('1st').value;
+        const second = document.getElementById('2nd').value;
+        const third = document.getElementById('3rd').value;
+        const type = document.getElementById('type').value;
+        const map = document.getElementById('map').value;
+        const version = document.getElementById('version').value;
+        const entryfees = document.getElementById('entryfees').value;
+        const totalplyear = document.getElementById('totalplyear').value;
+        const maxp = document.getElementById('maxp').value;
+        const roomid = document.getElementById('roomid').value;
+        const paasword = document.getElementById('paasword').value;
+
+        const matchDateInput = document.getElementById('date').value;
+
+          if (!matchDateInput) {
+         alert("Please select a match date.");
+          return;
+          }
+
+          const matchDate = new Date(matchDateInput).getTime();  // Convert to Unix timestamp (milliseconds)
+
+
+        // Reference to 'pubgmatches/<matchName>'
+        const matchRef = ref(database, 'pubgmatches/' + matchName);
+
+        // Set match data under the unique matchName
+        set(matchRef, {
+            prize: prize,
+            date: matchDate,
+            Twin: winners,
+            sec:second,
+            third:third,
+            entryFees: entryfees,
+            first: first,
+            map: map,
+            matchNumber: matchName,
+            maxPlayers: maxp,
+            pass: paasword,
+            perkill: perkill,
+            roomid: roomid,
+            totalPlayers: totalplyear,
+            type: type,
+            version: version,
+            
+            
+
+        }).then(() => {
+            alert("Match data added successfully!");
+            document.getElementById('form-container').reset(); // Reset form after submission
+        }).catch((error) => {
+            alert("Error: " + error.message);
+        });
+    }
+
+
+
+       // Function to BGMI submit match data
+    window.submitbgmiMatchData = function() {
+        const bprize = document.getElementById('bprize').value;
+        const bmatchName = document.getElementById('bmatchName').value;
+        
+        const bperkill = document.getElementById('bperkill').value;
+        const bwinners = document.getElementById('bwinners').value;
+        const bfirst = document.getElementById('b1st').value;
+        const bsecond = document.getElementById('b2nd').value;
+        const bthird = document.getElementById('b3rd').value;
+        const btype = document.getElementById('btype').value;
+        const bmap = document.getElementById('bmap').value;
+        const bversion = document.getElementById('bversion').value;
+        const bentryfees = document.getElementById('bentryfees').value;
+        const btotalplyear = document.getElementById('btotalplyear').value;
+        const bmaxp = document.getElementById('bmaxp').value;
+        const broomid = document.getElementById('broomid').value;
+        const bpaasword = document.getElementById('bpaasword').value;
+
+        const matchDateInput = document.getElementById('bdate').value;
+
+          if (!matchDateInput) {
+             alert("Please select a match date.");
+           return;
+          }
+
+         const matchDate = new Date(matchDateInput).getTime();  // Convert to Unix timestamp (milliseconds)
+
+        // Reference to 'pubgmatches/<matchName>'
+        const matchRef = ref(database, 'bgmimatchs/' + bmatchName);
+
+        // Set match data under the unique matchName
+        set(matchRef, {
+            prize: bprize,
+            date: matchDate,
+            Twin: bwinners,
+            sec:bsecond,
+            third:bthird,
+            entryFees: bentryfees,
+            first: bfirst,
+            map: bmap,
+            matchNumber: bmatchName,
+            maxPlayers: bmaxp,
+            pass: bpaasword,
+            perkill: bperkill,
+            roomid: broomid,
+            totalPlayers: btotalplyear,
+            type: btype,
+            version: bversion,
+            
+            
+
+        }).then(() => {
+            alert("Match data added successfully!");
+            document.getElementById('matchForm').reset(); // Reset form after submission
+        }).catch((error) => {
+            alert("Error: " + error.message);
+        });
+    }
+
+
+      // Function to freefire submit match data
+     window.submitfireMatchData = function() {
+
+        const prize = document.getElementById('fprize').value;
+        const matchName = document.getElementById('fmatchName').value;
+        
+        const perkill = document.getElementById('fperkill').value;
+        const winners = document.getElementById('fwinners').value;
+        const first = document.getElementById('f1st').value;
+        const second = document.getElementById('f2nd').value;
+        const third = document.getElementById('f3rd').value;
+        const type = document.getElementById('ftype').value;
+        const map = document.getElementById('fmap').value;
+        const version = document.getElementById('fversion').value;
+        const entryfees = document.getElementById('fentryfees').value;
+        const totalplyear = document.getElementById('ftotalplyear').value;
+        const maxp = document.getElementById('fmaxp').value;
+        const roomid = document.getElementById('froomid').value;
+        const paasword = document.getElementById('fpaasword').value;
+
+        const matchDateInput = document.getElementById('fdate').value;
+
+         if (!matchDateInput) {
+         alert("Please select a match date.");
+         return;
+         }
+
+        const matchDate = new Date(matchDateInput).getTime();  // Convert to Unix timestamp (milliseconds)
+
+
+        // Reference to 'pubgmatches/<matchName>'
+        const matchRef = ref(database, 'firematchs/' + matchName);
+
+        // Set match data under the unique matchName
+        set(matchRef, {
+            prize: prize,
+            date: matchDate,
+            Twin: winners,
+            sec:second,
+            third:third,
+            entryFees: entryfees,
+            first: first,
+            map: map,
+            matchNumber: matchName,
+            maxPlayers: maxp,
+            pass: paasword,
+            perkill: perkill,
+            roomid: roomid,
+            totalPlayers: totalplyear,
+            type: type,
+            version: version,
+            
+            
+
+        }).then(() => {
+            alert(" fire Match data added successfully!");
+            document.getElementById('matchForm').reset(); // Reset form after submission
+        }).catch((error) => {
+            alert("Error: " + error.message);
+        });
+    }
+
+
+
+           // Function to callof duty submit match data
+     window.submitcallMatchData = function() {
+
+         const prize = document.getElementById('cprize').value;
+          const matchName = document.getElementById('cmatchName').value;
+          
+           const perkill = document.getElementById('cperkill').value;
+           const winners = document.getElementById('cwinners').value;
+         const first = document.getElementById('c1st').value;
+          const second = document.getElementById('c2nd').value;
+         const third = document.getElementById('c3rd').value;
+          const type = document.getElementById('ctype').value;
+          const map = document.getElementById('cmap').value;
+         const version = document.getElementById('cversion').value;
+          const entryfees = document.getElementById('centryfees').value;
+         const totalplyear = document.getElementById('ctotalplyear').value;
+         const maxp = document.getElementById('cmaxp').value;
+         const roomid = document.getElementById('croomid').value;
+         const paasword = document.getElementById('cpaasword').value;
+
+         const matchDateInput = document.getElementById('cdate').value;
+
+         if (!matchDateInput) {
+         alert("Please select a match date.");
+         return;
+         }
+
+        const matchDate = new Date(matchDateInput).getTime();  // Convert to Unix timestamp (milliseconds)
+
+       // Reference to 'pubgmatches/<matchName>'
+       const matchRef = ref(database, 'callofduty/' + matchName);
+
+       // Set match data under the unique matchName
+    set(matchRef, {
+    prize: prize,
+    date: matchDate,
+    Twin: winners,
+    sec:second,
+     third:third,
+    entryFees: entryfees,
+    first: first,
+    map: map,
+    matchNumber: matchName,
+    maxPlayers: maxp,
+    pass: paasword,
+    perkill: perkill,
+    roomid: roomid,
+    totalPlayers: totalplyear,
+    type: type,
+    version: version,
+    
+    
+
+}).then(() => {
+    alert("Match data added successfully!");
+    document.getElementById('matchForm').reset(); // Reset form after submission
+}).catch((error) => {
+    alert("Error: " + error.message);
+});
+}
+
+
+
+
+
+    
+
+     
+</script>
+    
+</body>
+</html>

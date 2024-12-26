@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal Tracker</title>
+
+    <link rel="stylesheet" href="style/header.css">
+
+   
+
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
+
+        h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-bar {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #45a049;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.delete-btn{
+
+    background-color: #e60202;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+
+}
+
+.update-btn {
+
+    font-size: 16px;
+    border-radius: 4px;
+
+    background-color: #0224e6;
+    color: white;
+}
+
+.search-btn:hover {
+    background-color: #45a049;
+}
+
+        h3 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Loading Bar */
+        #loading-bar-container {
+            width: 100%;
+            height: 5px;
+            background-color: #ddd;
+            display: none;
+        }
+
+        #loading-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0;
+        }
+
+        /* Withdrawal Card Styling */
+        .withdrawal-card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 300px;
+            padding: 20px;
+            
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .withdrawal-card:hover {
+            transform: scale(1.05);
+        }
+
+        .withdrawal-header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .withdrawal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #222121;
+        }
+
+        .withdrawal-header p {
+            margin: 5px 0;
+            color: #3a3838;
+        }
+
+        .withdrawal-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .details-row{
+            display: grid;
+          
+        }
+
+        .details-row p {
+            margin: 0;
+            margin-top: 5px;
+            color: #111010;
+        }
+
+        .details-row p strong {
+            color: #0a0a0a;
+            margin-top: 5px;
+        }
+
+        /* Clean Button Styling */
+        .clean-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .clean-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .withdrawal-card {
+                width: 90%;
+            }
+        }
+
+        .withdrawal-card{
+
+            border: 0.2px solid #1f1919;
+            padding: 5px;
+            margin-left: 3px;
+            border-radius: 3px;
+            
+            width: auto;
+        }
+
+        .transaction-card{
+            border: 0.2px solid #aa2323;
+            padding: 5px;
+            margin-left: 3px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <header>
+        <div class="left">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span>
+        </div>
+
+        <div class="center">
+            <h1>HonestTurnament.Com = Admin Panal</h1>
+        </div>
+    </header>
+
+    <div style="margin-top: 30px;" class="optin">
+        <div class="Llist">
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home </a></li>
+                   
+                    <li><a  style="text-decoration-thickness: 5px;  background-color: red;">Withdrawl </a></li>
+                   
+                   
+                   
+                   
+                </ul>
+            </nav>
+        </div>
+    
+        <div class="Mlist">
+            <nav class="sec-nav">
+                <ul class="nav-list">
+                   
+                   
+                   
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <h2>Search and Update Transaction</h2>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="search-input" class="search-bar" placeholder="Enter User ID">
+        <button class="search-btn" id="search-btn">Search</button>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading" id="loading">Loading...</div>
+
+    <!-- Transaction Cards Container -->
+    <div  style="display: flex; color: red; flex-wrap: wrap;  border: 1px solid rgb(39, 39, 158); " id="transactions-container"></div>
+    <h3>Withdrawal Tracker</h3>
+
+    <!-- Loading Bar -->
+    <div  id="loading-bar-container">
+        <div   id="loading-bar"></div>
+    </div>
+
+    <div class="container" id="match-container"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getDatabase, ref,get, onValue, remove,update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+            authDomain: "testapp-6bd8a.firebaseapp.com",
+            databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+            projectId: "testapp-6bd8a",
+            storageBucket: "testapp-6bd8a.appspot.com",
+            messagingSenderId: "1083835564982",
+            appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+           // Function to search transaction by User ID
+        function searchTransaction() {
+            const userId = document.getElementById('search-input').value.trim();
+            if (userId === "") {
+                alert("Please enter a User ID");
+                return;
+            }
+
+            // Show loading indicator
+            document.getElementById('loading').style.display = 'block';
+            const transactionsRef = ref(database, `transactions/${userId}`);
+
+            // Fetch transactions for the entered userId
+            get(transactionsRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    displayTransactions(data);
+                } else {
+                    alert("No transactions found for this User ID.");
+                    document.getElementById('transactions-container').innerHTML = ""; // Clear previous results
+                }
+
+                // Hide loading indicator
+                document.getElementById('loading').style.display = 'none';
+            }).catch((error) => {
+                console.error("Error fetching transaction data:", error);
+                document.getElementById('loading').style.display = 'none';
+            });
+        }
+
+        // Display all transactions under the given User ID
+        function displayTransactions(transactions) {
+            const transactionsContainer = document.getElementById('transactions-container');
+            transactionsContainer.innerHTML = ""; // Clear previous transactions
+
+            for (const txnId in transactions) {
+                const txnData = transactions[txnId];
+
+                // Create a new transaction card for each transaction
+                const transactionCard = document.createElement('div');
+                transactionCard.classList.add('transaction-card');
+                transactionCard.innerHTML = `
+                    <h3 style="margin-left: 20px;" >Transaction ID: ${txnId}</h3>
+                    <p><strong>Amount:</strong> ₹${txnData.amount}</p>
+                     <p><strong>Out/Add:</strong> ₹${txnData.out}</p>
+
+                    <p><strong>Status:</strong> ${txnData.status}</p>
+                    <p><strong>Date:</strong> ${txnData.timestamp}</p>
+                    <button class="update-btn" data-txn-id="${txnId}" data-user-id="${document.getElementById('search-input').value.trim()}">Update Status</button>
+                    <button class="delete-btn" data-txn-id="${txnId}" data-user-id="${document.getElementById('search-input').value.trim()}">Delete</button>
+                `;
+                transactionsContainer.appendChild(transactionCard);
+            }
+
+            // Attach event listeners to the buttons dynamically
+            attachEventListeners();
+        }
+ 
+          // Function to attach event listeners to the buttons
+          function attachEventListeners() {
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const txnId = e.target.getAttribute('data-txn-id');
+                    const userId = e.target.getAttribute('data-user-id');
+                    deleteTransaction(txnId, userId);
+                });
+            });
+
+            const updateButtons = document.querySelectorAll('.update-btn');
+            updateButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const txnId = e.target.getAttribute('data-txn-id');
+                    const currentStatus = e.target.closest('.transaction-card').querySelector('p:nth-of-type(2)').textContent.split(":")[1].trim();
+                    updateStatus(txnId, currentStatus);
+                });
+            });
+        }
+
+
+             // Function to delete a transaction
+        function deleteTransaction(transactionId, userId) {
+            const transactionRef = ref(database, `transactions/${userId}/${transactionId}`);
+
+            // Remove the transaction from the database
+            remove(transactionRef).then(() => {
+                alert("Transaction deleted successfully!");
+                // Refresh the transaction view
+                searchTransaction();
+            }).catch((error) => {
+                console.error("Error deleting transaction:", error);
+            });
+        }
+
+
+            // Function to update the status of a transaction
+        function updateStatus(transactionId, currentStatus) {
+            const newStatus = prompt("Enter new status:", currentStatus);
+            if (newStatus) {
+                const userId = document.getElementById('search-input').value.trim();
+                const transactionRef = ref(database, `transactions/${userId}/${transactionId}`);
+
+                // Update the status in the database
+                update(transactionRef, { status: newStatus }).then(() => {
+                    alert("Status updated successfully!");
+                    // Refresh the transaction view
+                    searchTransaction();
+                }).catch((error) => {
+                    console.error("Error updating status:", error);
+                });
+            }
+        }
+
+
+          // Ensure script runs after the DOM is fully loaded
+          document.addEventListener('DOMContentLoaded', function() {
+            const searchBtn = document.getElementById('search-btn');
+            if (searchBtn) {
+                searchBtn.addEventListener('click', searchTransaction);
+            }
+        });
+
+        // Show loading bar
+        function showLoading() {
+            document.getElementById('loading-bar-container').style.display = 'block';
+            document.getElementById('loading-bar').style.width = '100%';
+        }
+
+        // Hide loading bar
+        function hideLoading() {
+            document.getElementById('loading-bar').style.width = '0%';
+            setTimeout(() => {
+                document.getElementById('loading-bar-container').style.display = 'none';
+            }, 500);
+        }
+
+        // Function to fetch withdrawal data
+        function fetchWithdrawals() {
+            showLoading();
+
+            const withdrawalsRef = ref(database, 'withdrwal/');  // Path to 'withdrwal' in your Firebase DB
+
+            onValue(withdrawalsRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const matchContainer = document.getElementById('match-container');
+                    matchContainer.innerHTML = ""; // Clear previous content
+
+                    // Loop through all users and their withdrawals
+                    Object.keys(data).forEach(userId => {
+                        const userWithdrawals = data[userId];
+
+                        // Convert the withdrawals object into an array and sort it by timestamp
+                        const sortedWithdrawals = Object.keys(userWithdrawals)
+                            .map(transactionId => {
+                                return { transactionId, ...userWithdrawals[transactionId] };
+                            })
+                            .sort((a, b) => b.timestamp - a.timestamp); // Sort by timestamp in descending order
+
+                        // Loop through each sorted withdrawal data
+                        sortedWithdrawals.forEach(withdrawalData => {
+                            const withdrawalDiv = document.createElement('div');
+                            withdrawalDiv.classList.add('withdrawal-card');
+
+                            // Displaying withdrawal data
+                            withdrawalDiv.innerHTML = `
+                                <div class="withdrawal-header">
+                                    <h3>User: ${userId}</h3>
+                                    <p><strong>Transaction ID:</strong> ${withdrawalData.transactionId}</p>
+                                </div>
+                                <div class="withdrawal-details">
+                                    <div class="details-row">
+                                       
+                                        <p><strong>Status:</strong> ${withdrawalData.status}</p>
+                                         <p><strong>Amount:</strong> ₹${withdrawalData.amount}</p>
+                                          <p   style=" color: red; "><strong>Upid:</strong> ${withdrawalData.upiId}</p>
+                                        <p><strong>Date:</strong> ${new Date(withdrawalData.timestamp).toLocaleString()}</p>
+                                    </div>
+                                </div>
+                            `;
+
+                            // Create the "Clean" button
+                            const cleanButton = document.createElement('button');
+                            cleanButton.classList.add('clean-btn');
+                            cleanButton.textContent = 'Clean';  // Changed text to "Clean"
+
+                            // Add the click event listener
+                            cleanButton.addEventListener('click', () => {
+                                deleteWithdrawal(userId, withdrawalData.transactionId);
+                            });
+
+                            // Append the clean button to the withdrawal card
+                            withdrawalDiv.appendChild(cleanButton);
+
+                            // Append the withdrawal data to the container
+                            matchContainer.appendChild(withdrawalDiv);
+                        });
+                    });
+                } else {
+                    console.log("No withdrawal data available.");
+                }
+
+                hideLoading();
+            });
+        }
+
+        // Function to delete a withdrawal from Firebase
+        function deleteWithdrawal(userId, transactionId) {
+            const withdrawalRef = ref(database, `withdrwal/${userId}/${transactionId}`);
+
+            remove(withdrawalRef)
+                .then(() => {
+                    fetchWithdrawals();  // Re-fetch data to update the UI
+                    alert("Withdrawal cleaned successfully!");
+                    fetchWithdrawals();  // Re-fetch data to update the UI
+                })
+                .catch((error) => {
+                    console.error("Error cleaning withdrawal:", error);
+                });
+        }
+
+        // Fetch withdrawals on page load
+        fetchWithdrawals();
+    </script>
+
+</body>
+</html>

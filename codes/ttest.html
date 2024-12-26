@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Realtime Notifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Notification Icon Styles */
+        .notification-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .notification-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .popup-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .popup ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .popup li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .popup li:last-child {
+            border-bottom: none;
+        }
+
+        .popup-close {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup-close:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+<script type="module" src="codes/js/sliderscript.js"></script>
+
+</head>
+<body>
+
+    <h1>Firebase Realtime Notifications Example</h1>
+
+    <!-- Notification Icon -->
+    <div class="notification-container">
+        <span class="notification-icon">&#128276;</span>
+        <span class="notification-count" id="notification-count">0</span>
+    </div>
+
+    <!-- Popup to show notices -->
+    <div class="popup" id="notification-popup">
+        <div class="popup-header">New Notices</div>
+        <ul id="notification-list">
+            <!-- Notices will be populated here -->
+        </ul>
+        <div class="popup-close" id="popup-close">Close</div>
+    </div>
+
+   
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style/header.css">
+
+    <style>
+        /* General body styling */
+       
+
+        /* Main container for the page */
+        .container {
+            width: 100%;
+            
+            padding: 20px;
+            background-color: rgb(221, 211, 211);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Heading */
+        h2 {
+            font-size: 2.em;
+            margin-bottom: 10px;
+            color: #191b1d;
+        }
+
+        /* Matches container */
+        #matches-container {
+            margin-top: 20px;
+            display: grid;
+           
+        }
+
+        /* Match data card */
+        .match-data {
+            background-color: #a50303;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .match-data:hover {
+            margin-top: 10px;
+            transform: translateY(-10px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Match name */
+        .match-data h3 {
+            font-size: 1.5em;
+            color: #fffafa;
+            margin-bottom: 5px;
+        }
+
+        /* Player list container */
+        .player-list {
+            margin-top: 10px;
+            display: flex;
+           
+        }
+
+        /* Individual player */
+        .player {
+            background-color: #F0F4F8;
+            padding: 1px;
+           
+            border-radius: 5px;
+            font-size: 0.6em;
+            color: #000000;
+            flex-wrap: wrap;
+        }
+
+        /* No matches message */
+        .no-matches {
+            font-size: 1.2em;
+            color: #4d3ce7;
+            text-align: center;
+        }
+
+        /* Delete button */
+        .delete-btn {
+            background-color: #3d00e4;
+            color: white;
+            border: none;
+            padding: 3px 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .delete-btn:hover {
+            background-color: #2bc032;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <header>
+       
+        <div class="left">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span> <!-- Menu Button -->
+        </div>
+
+        <div class="center">
+            <h1>HonestTurnament.Com =  Admin Panal</h1>
+        </div>
+        <div class="right">
+            <div class="wallet">
+               
+            </div>
+           
+        </div>
+    </header>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleMenu()">×</a>
+        <a href="pubg.html">Home</a>
+        <a href="profile.html">My Account</a> 
+        <a href="matchList.html">Match Results</a>     
+        <a href="support.html">Support</a>
+        <a href="login.html" onclick="logout()">Log Out</a>
+    </div>
+
+    <script>
+        // Toggle the sidebar menu open/close
+        function toggleMenu() {
+            const sidebar = document.getElementById("mySidebar");
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+            } else {
+                sidebar.style.width = "250px";
+            }
+        }
+    
+        // Logout Function (clear local storage/session storage)
+        function logout() {
+            localStorage.removeItem('userUID');  // Remove UID from localStorage (or sessionStorage if used)
+            window.location.href = "login.html";  // Redirect to login page
+        }
+    </script>
+
+<a href="https://example.com/download" class="download-link">App Download Now</a>
+
+
+
+<div class="optin">
+    <div class="Llist">
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html">Home </a></li>
+                <li><a style="text-decoration-thickness: 5px; background-color: red; "  > join Matchas</a></li>
+                
+               
+               
+               
+            </ul>
+        </nav>
+    </div>
+
+    <div class="Mlist">
+        <nav class="sec-nav">
+            <ul class="nav-list">
+               
+               
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+    <h2>Join Matches Data</h2>
+    <div id="matches-container"></div>
+</div>
+
+<script type="module">
+    // Firebase SDK imports (using modern imports)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+    import { getDatabase, ref, get, remove } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js";
+
+    // Firebase configuration (replace with your config)
+    const firebaseConfig = {
+        apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+        authDomain: "testapp-6bd8a.firebaseapp.com",
+        databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+        projectId: "testapp-6bd8a",
+        storageBucket: "testapp-6bd8a.appspot.com",
+        messagingSenderId: "1083835564982",
+        appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // Function to fetch data from Firebase
+    function fetchJoinMatches() {
+        const matchesRef = ref(database, 'joinmatchs'); // Reference to 'joinmatches' path
+
+        // Fetch data
+        get(matchesRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const matchesData = snapshot.val();
+                displayMatches(matchesData);
+            } else {
+                document.getElementById('matches-container').innerHTML = '<p class="no-matches">No data available.</p>';
+            }
+        }).catch((error) => {
+            console.error("Error fetching data: ", error);
+        });
+    }
+
+    // Function to delete match data from Firebase
+    function deleteMatch(matchName) {
+        const matchRef = ref(database, 'joinmatchs/' + matchName);
+        remove(matchRef)
+            .then(() => {
+                alert('Match deleted successfully');
+                fetchJoinMatches(); // Refresh the data
+            })
+            .catch((error) => {
+                console.error("Error deleting match: ", error);
+            });
+    }
+
+    // Function to display match data
+    function displayMatches(matches) {
+        const container = document.getElementById('matches-container');
+        container.innerHTML = ''; // Clear previous data
+
+        Object.keys(matches).forEach(matchName => {
+            const match = matches[matchName];
+            const matchDiv = document.createElement('div');
+            matchDiv.classList.add('match-data');
+            
+            // Heading for the match (like 'Duo2')
+            const matchHeading = document.createElement('h3');
+            matchHeading.innerText = matchName;
+            matchDiv.appendChild(matchHeading);
+
+            // Create a list for player IDs
+            const playerListDiv = document.createElement('div');
+            playerListDiv.classList.add('player-list');
+            
+            Object.keys(match).forEach(playerID => {
+                const playerDiv = document.createElement('div');
+                playerDiv.classList.add('player');
+                playerDiv.innerText = match[playerID].playerID; // Display the playerID
+                playerListDiv.appendChild(playerDiv);
+            });
+
+            // Create and append the delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-btn');
+            deleteButton.innerText = 'Delete Match';
+            deleteButton.onclick = function() {
+                deleteMatch(matchName); // Call the delete function
+            };
+
+            matchDiv.appendChild(playerListDiv);
+            matchDiv.appendChild(deleteButton);
+
+            // Append the match data to the container
+            container.appendChild(matchDiv);
+        });
+    }
+
+    // Fetch data when the page loads
+    window.onload = fetchJoinMatches;
+</script>
+    
+</body>
+</html>

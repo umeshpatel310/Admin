@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style/header.css">
+
+    <style>
+        .form-container {
+         background-color: #3134c5;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+         width: 100%;
+         display: grid;
+         margin-bottom: 70px;
+         margin-top: 40px;
+        
+     }
+
+     .form-container entr{
+
+         display: flex;
+         background-color: aliceblue;
+         width: 100%;
+
+
+     }
+
+     form {
+         display: flex;
+         flex-direction: column;
+     }
+
+     label {
+         font-size: 16px;
+         color: #ede8f0;
+         margin-bottom: 8px;
+     }
+
+     input[type="text"], input[type="date"] {
+         padding: 10px;
+         font-size: 16px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         margin-bottom: 20px;
+         outline: none;
+         transition: border-color 0.3s ease;
+     }
+
+     input[type="text"]:focus, input[type="date"]:focus {
+         border-color: #007BFF;
+     }
+
+     button {
+         padding: 12px 20px;
+         font-size: 18px;
+         color: #fff;
+         background-color: #d31616;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         transition: background-color 0.3s ease;
+     }
+
+     button:hover {
+         background-color: #ecc901;
+     }
+
+     button:focus {
+         outline: none;
+     }
+
+     .form-container p {
+         font-size: 14px;
+         text-align: center;
+         margin-top: 10px;
+     }
+
+     h2 {
+         margin-top: 20px;
+         font-size: 36px;
+         color: #f1e6e6;
+         margin-bottom: 20px;
+     }
+
+     
+
+
+ </style>
+    
+</head>
+<body>
+
+    <header>
+       
+        <div class="left">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span> <!-- Menu Button -->
+        </div>
+
+        <div class="center">
+            <h1>HonestTurnament.Com =  Admin Panal</h1>
+        </div>
+        <div class="right">
+            <div class="wallet">
+               
+            </div>
+           
+        </div>
+    </header>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleMenu()">×</a>
+        <a href="pubg.html">Home</a>
+        <a href="profile.html">My Account</a> 
+        <a href="matchList.html">Match Results</a>     
+        <a href="support.html">Support</a>
+        <a href="login.html" onclick="logout()">Log Out</a>
+    </div>
+
+    <script>
+        // Toggle the sidebar menu open/close
+        function toggleMenu() {
+            const sidebar = document.getElementById("mySidebar");
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+            } else {
+                sidebar.style.width = "250px";
+            }
+        }
+    
+        // Logout Function (clear local storage/session storage)
+        function logout() {
+            localStorage.removeItem('userUID');  // Remove UID from localStorage (or sessionStorage if used)
+            window.location.href = "login.html";  // Redirect to login page
+        }
+    </script>
+
+<a href="https://example.com/download" class="download-link">App Download Now</a>
+
+
+
+<div class="optin">
+    <div class="Llist">
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html">Home </a></li>
+               
+               
+               
+               
+            </ul>
+        </nav>
+    </div>
+
+    <div class="Mlist">
+        <nav class="sec-nav">
+            <ul class="nav-list">
+
+               
+               
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div id="uploadProgressContainer" style="display: none;"></div>
+    <p>Uploading Images...</p>
+    <progress id="uploadProgress" value="0" max="100" style="width: 100%;"></progress>
+    <p id="uploadPercentage">0%</p>
+</div>
+
+<div class="container" id="match-container"></div>
+
+<div class="form-container">
+
+
+
+    <h2> Match Result Entry</h1>
+
+    <!-- Add file input fields for image upload -->
+
+
+    
+
+    <div class="entr" >
+
+        <label for="matchName">Match Name:</label>
+        <input type="text" id="matchName" required value="PUBG-">
+        
+        <label for="prize">Prize Amount:</label>
+        <input type="text" id="prize" required placeholder="Enter prize amount">
+
+        <label for="matchName">Per kill:</label>
+        <input type="text" id="perkill" required placeholder="Per kill">
+        
+        <label for="prize">Winners:</label>
+        <input type="text" id="winners" required placeholder="Enter Winners">
+
+        <label for="matchName">1st :</label>
+        <input type="text" id="1st" required placeholder="Enter 1st ">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">2nd:</label>
+        <input type="text" id="2nd" required placeholder="Enter 2nd">
+        
+        <label for="prize">3rd:</label>
+        <input type="text" id="3rd" required placeholder="Enter 3rd">
+
+        <label for="matchName">Type:</label>
+        <input type="text" id="type" required placeholder="Enter match Type">
+        
+        <label for="prize">Map:</label>
+        <input type="text" id="map" required placeholder="Enter Map">
+
+        <label for="matchName">Version:</label>
+        <input type="text" id="version" required placeholder="Enter Version Tpp/Fpp">
+
+    </div>
+
+    <div class="entr" >
+
+        <label for="matchName">Entry Fees:</label>
+        <input type="text" id="entryfees" required placeholder="Enter Entry Fees">
+        
+        <label for="prize">Total Players:</label>
+        <input type="text" id="totalplyear" required value="0">
+
+        <label for="matchName">Max Players:</label>
+        <input type="text" id="maxp" required value="100">
+        
+        <label for="prize">Room id:</label>
+        <input type="text" id="roomid" required value="please">
+
+        <label for="matchName">Paasword:</label>
+        <input type="text" id="paasword" required value="wait">
+
+    </div>
+
+   
+    
+    <label for="date">Match Date:</label>
+    <input type="text" id="date" required placeholder="Date and Time">
+
+      <label style="color: #fff;" for="images">Upload Images:</label>
+       <input style="width: 100%; color: #fff; font-size: 25px; margin-bottom: 80px;" type="file" id="images" multiple required>
+    
+    <button type="button" onclick="submitMatchData()">Submit</button>
+
+</div>
+
+
+
+
+
+  <!-- Firebase SDK (v9 or later) -->
+<script type="module">
+     // Firebase SDK (v9 or later)
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+import { getDatabase, ref, set, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js';
+
+// Initialize Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+    authDomain: "testapp-6bd8a.firebaseapp.com",
+    databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+    projectId: "testapp-6bd8a",
+    storageBucket: "testapp-6bd8a.appspot.com",
+    messagingSenderId: "1083835564982",
+    appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+};
+
+// Initialize Firebase app and services
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const storage = getStorage(app);
+
+// Function to handle match submission
+window.submitMatchData = async function () {
+    const prize = document.getElementById('prize').value;
+    const matchName = document.getElementById('matchName').value;
+    const date = document.getElementById('date').value;
+    const perkill = document.getElementById('perkill').value;
+    const winners = document.getElementById('winners').value;
+    const first = document.getElementById('1st').value;
+    const second = document.getElementById('2nd').value;
+    const third = document.getElementById('3rd').value;
+    const type = document.getElementById('type').value;
+    const map = document.getElementById('map').value;
+    const version = document.getElementById('version').value;
+    const entryfees = document.getElementById('entryfees').value;
+    const totalplyear = document.getElementById('totalplyear').value;
+    const maxp = document.getElementById('maxp').value;
+    const roomid = document.getElementById('roomid').value;
+    const paasword = document.getElementById('paasword').value;
+
+    // Get the image files
+    const imageFiles = document.getElementById('images').files;
+    
+    // Create an array to store image URLs
+    let imageUrls = [];
+
+    // Show the progress container
+    document.getElementById('uploadProgressContainer').style.display = 'block';
+
+    // Upload images to Firebase Storage and get their URLs
+    for (let i = 0; i < imageFiles.length; i++) {
+        const file = imageFiles[i];
+        const imageRef = storageRef(storage, 'images/' + file.name);
+
+        // Create a reference to the file and use uploadBytesResumable to track progress
+        const uploadTask = uploadBytesResumable(imageRef, file);
+
+        // Monitor upload progress
+        uploadTask.on('state_changed', 
+            (snapshot) => {
+                // Calculate the progress as a percentage
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                // Update the progress bar and percentage text
+                document.getElementById('uploadProgress').value = progress;
+                document.getElementById('uploadPercentage').textContent = `${Math.round(progress)}%`;
+            },
+            (error) => {
+                // Handle errors here
+                alert("Error uploading image: " + error.message);
+            },
+            async () => {
+                // Get the download URL of the uploaded image
+                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                imageUrls.push(downloadURL);
+
+                // If all images are uploaded, submit match data
+                if (i === imageFiles.length - 1) {
+                    // Reference to 'Results/<matchName>'
+                    const matchRef = ref(database, 'Results/' + matchName);
+
+                    // Set match data including image URLs and timestamp
+                    set(matchRef, {
+                        prize: prize,
+                        date: date,
+                        Twin: winners,
+                        entryFees: entryfees,
+                        first: first,
+                        map: map,
+                        matchNumber: matchName,
+                        maxPlayers: maxp,
+                        pass: paasword,
+                        perkill: perkill,
+                        roomid: roomid,
+                        totalPlayers: totalplyear,
+                        type: type,
+                        version: version,
+                        imageURLs: imageUrls,  // Save the image URLs in the database
+                        timestamp: serverTimestamp()  // Save the timestamp (set automatically by Firebase)
+                    }).then(() => {
+                        alert("Match data and images added successfully!");
+                        document.getElementById('form-container').reset(); // Reset form after submission
+                        document.getElementById('uploadProgressContainer').style.display = 'none'; // Hide progress bar
+                    }).catch((error) => {
+                        alert("Error: " + error.message);
+                    });
+                }
+            }
+        );
+    }
+}
+
+
+       
+
+
+
+    
+
+     
+</script>
+    
+</body>
+</html>

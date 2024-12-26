@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Match Date</title>
+</head>
+<body>
+
+    <h1>Update Match Date</h1>
+
+    <label for="matchDate">Match Date (yyyy-mm-dd hh:mm:ss):</label>
+    <input type="datetime-local" id="matchDate">
+    <button id="updateButton">Update Date</button>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+            authDomain: "testapp-6bd8a.firebaseapp.com",
+            databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+            projectId: "testapp-6bd8a",
+            storageBucket: "testapp-6bd8a.appspot.com",
+            messagingSenderId: "1083835564982",
+            appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Function to update match date in Firebase
+        function updateMatchDate() {
+            const matchDateInput = document.getElementById('matchDate').value;
+
+            if (!matchDateInput) {
+                alert("Please select a match date.");
+                return;
+            }
+
+            const matchDate = new Date(matchDateInput).getTime();  // Convert to Unix timestamp (milliseconds)
+
+            const matchRef = ref(database, 'matches/match1');  // Adjust path as needed
+            set(matchRef, {
+                matchNumber: 1,
+                date: matchDate,  // Store as Unix timestamp (number)
+                prize: 500,
+                totalPlayers: 10,
+                maxPlayers: 100
+            }).then(() => {
+                alert("Match date updated successfully!");
+            }).catch((error) => {
+                console.error("Error updating match date:", error);
+                alert("Error updating date. Please try again.");
+            });
+        }
+
+        // Attach event listener to the button after the page is fully loaded
+        window.onload = () => {
+            const updateButton = document.getElementById('updateButton');
+            updateButton.addEventListener('click', updateMatchDate);
+        };
+    </script>
+
+</body>
+</html>
